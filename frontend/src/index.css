@@ -1,0 +1,15 @@
+@tailwind base;@tailwind components;@tailwind utilities;
+html{scroll-behavior:smooth}
+body{margin:0;background:#04201C;color:#F5F1E6;font-family:"Inter Variable",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;font-variant-numeric:tabular-nums}
+::selection{background:#D4AF37;color:#04201C}
+::-webkit-scrollbar{width:9px;height:9px}::-webkit-scrollbar-thumb{background:rgba(212,175,55,.3);border-radius:9px}
+:focus-visible{outline:2px solid #F5D77A;outline-offset:2px}
+.glass{background:rgba(12,59,53,.55);border:1px solid rgba(212,175,55,.18);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.gold-text{background:linear-gradient(135deg,#F5D77A,#D4AF37 55%,#A67C00);-webkit-background-clip:text;background-clip:text;color:transparent}
+.mesh{position:fixed;inset:0;z-index:-1;background:radial-gradient(60vmax 60vmax at 10% 0%,rgba(212,175,55,.14),transparent 60%),radial-gradient(50vmax 50vmax at 100% 20%,rgba(52,211,153,.12),transparent 55%),radial-gradient(60vmax 60vmax at 40% 110%,rgba(12,59,53,.9),transparent 60%),#04201C;animation:meshmove 22s ease-in-out infinite alternate}
+@keyframes meshmove{from{background-position:0 0,0 0,0 0}to{background-position:40px 30px,-40px 20px,30px -30px;filter:hue-rotate(8deg)}}
+@keyframes pulse-ring{0%{transform:scale(.8);opacity:.8}100%{transform:scale(2.2);opacity:0}}
+.pulse-ring{position:absolute;inset:0;border-radius:9999px;border:2px solid #D4AF37;animation:pulse-ring 1.8s ease-out infinite}
+@keyframes shine{from{transform:translateX(-130%) skewX(-18deg)}to{transform:translateX(330%) skewX(-18deg)}}
+.shine::after{content:"";position:absolute;inset:0;width:35%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);animation:shine 4.5s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

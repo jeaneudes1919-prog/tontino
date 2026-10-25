@@ -1,0 +1,3 @@
+# Notes personnelles
+À ajouter pour s'entraîner : tests Vitest (formateurs de `lib.js`, `PayModal` avec API simulée, simulateur de prêt), react-query pour le cache des listes, découpage des gros fichiers de pages en composants, palette de commandes (Ctrl+K), mode hors ligne, pagination côté serveur partout, graphiques de comparaison entre membres, gestion fine des erreurs réseau.
+Concepts à revoir : contexte de coopérative (`coop.jsx`) qui expose un client API préfixé par la coopérative, sondage du statut de paiement (`PayModal` dans `Money.jsx`), animation du tirage (`Draw` dans `Tontines.jsx`), alertes personnalisées (`UIProvider` : `useToast` et `useConfirm`), carte 3D avec `useMotionValue` (`WalletCard`), téléchargement de fichiers en blob (`api.js`).

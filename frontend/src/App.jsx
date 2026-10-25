@@ -1,0 +1,12 @@
+import {Navigate,Route,Routes} from "react-router-dom";import {useAuth} from "./auth.jsx";import {api} from "./api.js";import {useLoad} from "./lib.js";import {Skeleton} from "./ui.jsx";
+import Shell from "./Shell.jsx";import {AuthPage,Onboarding} from "./Auth.jsx";import Dashboard from "./Dashboard.jsx";import Members from "./Members.jsx";import {TontineList,TontineDetail,Draw} from "./Tontines.jsx";import {Contributions,Wallet} from "./Money.jsx";import {LoanList,LoanNew,LoanDetail} from "./Loans.jsx";import {Announcements,Meetings} from "./Community.jsx";import {Reports,Audit,SettingsPage,Notifications} from "./Admin.jsx";
+function Guard({children}){const {user,loading}=useAuth();if(loading)return <div className="mx-auto max-w-3xl p-8"><Skeleton className="h-64"/></div>;return user?children:<Navigate to="/login" replace/>}
+function Home(){const [coops]=useLoad(()=>api.get("/my/cooperatives"),[]);if(!coops)return <div className="mx-auto max-w-3xl p-8"><Skeleton className="h-64"/></div>;
+const last=+localStorage.getItem("tontino_coop");const t=coops.find(c=>c.id===last)||coops[0];return t?<Navigate to={`/c/${t.id}/dashboard`} replace/>:<Navigate to="/onboarding" replace/>}
+export default function App(){return <Routes><Route path="/login" element={<AuthPage/>}/><Route path="/register" element={<AuthPage register/>}/>
+<Route path="/" element={<Guard><Home/></Guard>}/><Route path="/onboarding" element={<Guard><Onboarding/></Guard>}/>
+<Route path="/c/:coopId" element={<Guard><Shell/></Guard>}><Route index element={<Navigate to="dashboard" replace/>}/><Route path="dashboard" element={<Dashboard/>}/><Route path="members" element={<Members/>}/>
+<Route path="tontines" element={<TontineList/>}/><Route path="tontines/:tid" element={<TontineDetail/>}/><Route path="tontines/:tid/draw" element={<Draw/>}/>
+<Route path="contributions" element={<Contributions/>}/><Route path="wallet" element={<Wallet/>}/><Route path="loans" element={<LoanList/>}/><Route path="loans/new" element={<LoanNew/>}/><Route path="loans/:lid" element={<LoanDetail/>}/>
+<Route path="announcements" element={<Announcements/>}/><Route path="meetings" element={<Meetings/>}/><Route path="reports" element={<Reports/>}/><Route path="audit" element={<Audit/>}/><Route path="settings" element={<SettingsPage/>}/><Route path="notifications" element={<Notifications/>}/></Route>
+<Route path="*" element={<Navigate to="/" replace/>}/></Routes>}
